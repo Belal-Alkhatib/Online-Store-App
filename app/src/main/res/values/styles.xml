@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RippleStyleGray">
+        <item name="mrl_rippleOverlay">true</item><!-- الي التاثير يظهر على الفيو -اللي هو الزر -->
+        <item name="mrl_rippleColor">#80808080</item><!-- لون التموج اللي حيظهر -->
+        <item name="mrl_rippleAlpha">0.3</item>
+
+    </style>
+
+    <style name="RippleStyleGray2">
+    <item name="mrl_rippleOverlay">true</item><!-- الي التاثير يظهر على الفيو -اللي هو الزر -->
+    <item name="mrl_rippleColor">#B3ECF4</item><!-- لون التموج اللي حيظهر -->
+    <item name="mrl_rippleAlpha">0.3</item>
+    </style>
+
+    <style name="RippleStyleGrayWight">
+        <item name="mrl_rippleOverlay">true</item><!-- الي التاثير يظهر على الفيو -اللي هو الزر -->
+        <item name="mrl_rippleColor">#ffffff</item><!-- لون التموج اللي حيظهر -->
+        <item name="mrl_rippleAlpha">0.3</item>
+    </style>
+</resources>
