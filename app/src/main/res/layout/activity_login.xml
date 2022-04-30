@@ -68,6 +68,7 @@
                 />
 
             <EditText
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -87,6 +88,7 @@
                 />
 
             <EditText
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -102,6 +104,7 @@
                 android:layout_height="wrap_content"
                 style="@style/RippleStyleGrayWight">
                 <Button
+                    android:id="@+id/btnSignin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_gradient"
@@ -129,9 +132,10 @@
                     android:layout_marginLeft="41dp"
                     />
                 <TextView
+                    android:id="@+id/tvSignUpLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login"
+                    android:text="Sign Up"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#86E8F6"
