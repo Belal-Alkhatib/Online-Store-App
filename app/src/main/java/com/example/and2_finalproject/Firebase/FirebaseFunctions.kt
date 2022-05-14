@@ -1,10 +1,12 @@
 package com.example.and2_finalproject.Firebase
 
 import android.util.Log
+import android.widget.Toast
 import com.example.and2_finalproject.model.Admin
 import com.example.and2_finalproject.model.Category
 import com.example.and2_finalproject.model.Product
 import com.example.and2_finalproject.model.Visitor
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class FirebaseFunctions {
@@ -15,19 +17,8 @@ class FirebaseFunctions {
     val COLLECTION_VISITORS = "Visitors";
     val COLLECTION_CATEGORIES = "categories";
 
-    fun addProduct(product: Product) {
-        db.collection(COLLECTION_PRODUCTS)
-            .add(product)
-            .addOnSuccessListener { documentReference ->
-                Log.e(TAG, "Added Successfully")
-            }
-            .addOnFailureListener {
-                Log.e(TAG, it.message.toString())
-            }
-    }
 
-    fun addProductd(
-        id: String, name: String, description: String, price: Double,
+    fun addProduct(id: String, name: String, description: String, price: Double,
         location: String, image: Int, categoryName: String
     ) {
         val product = hashMapOf(
@@ -49,8 +40,8 @@ class FirebaseFunctions {
             }
     }
 
-    fun addCategory(name: String, description: String,) {
-        val category = hashMapOf("name" to name , "description" to description)
+    fun addCategory(name: String, description: String) {
+        val category = hashMapOf("name" to name, "description" to description)
         db.collection(COLLECTION_CATEGORIES)
             .add(category)
             .addOnSuccessListener { documentReference ->
@@ -61,7 +52,7 @@ class FirebaseFunctions {
             }
     }
 
-    fun addAdmin( name:String,  password:String) {
+    fun addAdmin(name: String, password: String) {
         var admin = hashMapOf("name" to name, "password" to password)
         db.collection(COLLECTION_ADMINS)
             .add(admin)
@@ -73,18 +64,15 @@ class FirebaseFunctions {
             }
     }
 
-    //    private fun addAdmind(name:String , pass:String) {
-//        val admin = hashMapOf("name" to name,"password" to pass)
-//        db.collection(COLLECTION_ADMINS)
-//            .add(admin)
-//            .addOnSuccessListener { documentReference ->
-//                Log.e(TAG, "Added Successfully")
-//            }
-//            .addOnFailureListener {
-//                Log.e(TAG,it.message.toString())
-//            }
-//    }
-    fun addVisitor(visitor: Visitor) {
+
+    fun addVisitor(name: String,email: String,phoneNumber: String,password: String,image: String) {
+        var visitor = hashMapOf(
+            "name" to name,
+            "email" to email,
+            "phoneNumber" to phoneNumber,
+            "password" to password,
+            "image" to image
+        )
         db.collection(COLLECTION_VISITORS)
             .add(visitor)
             .addOnSuccessListener { documentReference ->
@@ -95,62 +83,94 @@ class FirebaseFunctions {
             }
     }
 
-    fun getOneProducts(id: String) {
+    //  get
+    fun getOneProducts(id: String): Product {
+        var product: Product? = null
         db.collection(COLLECTION_PRODUCTS)
-//            .document(id) بتعمل خطء انا مش فاهمه
+            .document(id)
+            .get()
+            .addOnSuccessListener { document ->
+                product = Product(
+                    document.id,
+                    document.getString("name")!!,
+                    document.getString("description")!!,
+                    document.getDouble("price")!!,
+                    document.getString("location")!!,
+                    document.getString("image")!!,
+                    document.getString("categoryName")!!,
+                )
+                Log.e(TAG, "Added Successfully")
+            }.addOnFailureListener { error ->
+                Log.e("hzm", error.message.toString())
+            }
+        return product!!
+    }
+
+    fun getAllProducts(): ArrayList<Product> {
+        val arr = ArrayList<Product>()
+        db.collection(COLLECTION_PRODUCTS)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot) {
-                    var id = document.getString("id")
-                    var name = document.getString("name")
-                    var description = document.getString("description")
-                    var price = document.getDouble("price")
-                    var location = document.getString("location")
-                    var image = document.getString("image")?.toInt()
-                    var categoryName = document.getString("categoryName")
-//                    var id:String , var name:String , var description:String , var price:Double,
-//                    var location:String , var image:Int , var categoryName:String
+                    var id = document.getString("id")!!
+                    var name = document.getString("name")!!
+                    var description = document.getString("description")!!
+                    var price = document.getDouble("price")!!
+                    var location = document.getString("location")!!
+                    var image = document.getString("image")!!
+                    var categoryName = document.getString("categoryName")!!
+                    arr.add(Product(id, name, description, price, location, image, categoryName))
                 }
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
             }
+        return arr
     }
 
-    fun getAllProducts() {
+    fun getOneVisitor(id: String):Visitor {
+        var visitor:Visitor? = null
         db.collection(COLLECTION_PRODUCTS)
+            .document(id)
             .get()
-            .addOnSuccessListener { querySnapshot ->
-                for (document in querySnapshot) {
-                    var id = document.getString("id")
-                    var name = document.getString("name")
-                    var description = document.getString("description")
-                    var price = document.getDouble("price")
-                    var location = document.getString("location")
-                    var image = document.getString("image")?.toInt()
-                    var categoryName = document.getString("categoryName")
-//                    var id:String , var name:String , var description:String , var price:Double,
-//                    var location:String , var image:Int , var categoryName:String
-                }
+            .addOnSuccessListener { document ->
+                visitor = Visitor(
+                    document.id,
+                    document.getString("name")!!,
+                    document.getString("email")!!,
+                    document.getString("password")!!,
+                    document.getString("image")!!
+                )
+                Log.e(TAG, "Added Successfully")
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
             }
+        return  visitor!!
     }
 
-    //    delete product
-    fun deleteProductById(id: String) {
-        db.collection("product").document(id)
-            .delete()
-            .addOnSuccessListener { it ->
-                Log.e(TAG, "Deleted Successfully")
-            }.addOnFailureListener { exception ->
-                Log.e(TAG, exception.message.toString())
+    fun getOneAdmin(id: String):Admin {
+        var admin:Admin? = null
+        db.collection(COLLECTION_PRODUCTS)
+            .document(id)
+            .get()
+            .addOnSuccessListener { document ->
+                 admin = Admin(
+                    document.id,
+                    document.getString("name")!!,
+                    document.getString("password")!!
+                )
+                Log.e(TAG, "Added Successfully")
+            }.addOnFailureListener { error ->
+                Log.e("hzm", error.message.toString())
             }
+        return  admin!!
     }
+
 
     fun updateProduct(
         oldId: String, name: String, description: String, price: Double,
-        location: String, image: Int, categoryName: String
-    ) {
+        location: String, image: String, categoryName: String
+    ): Boolean {
+        var status = true
         val product = HashMap<String, Any>()
         product["name"] = name
         product["description"] = description
@@ -163,9 +183,27 @@ class FirebaseFunctions {
         db.collection(COLLECTION_PRODUCTS).document(oldId).update(product)
             .addOnSuccessListener {
                 Log.e(TAG, "Updated Successfully")
-            }.addOnFailureListener {exception->
+                status = true
+            }.addOnFailureListener { exception ->
                 Log.e(TAG, exception.message.toString())
+                status = false
             }
+        return status
+    }
+
+    //    delete product
+    fun deleteProductById(id: String): Boolean {
+        var status = true
+        db.collection("product").document(id)
+            .delete()
+            .addOnSuccessListener { it ->
+                Log.e(TAG, "Deleted Successfully")
+                status = true
+            }.addOnFailureListener { exception ->
+                Log.e(TAG, exception.message.toString())
+                status = false
+            }
+        return status
     }
 
 }
