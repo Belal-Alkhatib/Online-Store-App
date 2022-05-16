@@ -1,4 +1,4 @@
-package com.example.and2_finalproject.Firebase
+package com.example.and2_finalproject.firebase
 
 import android.util.Log
 import android.widget.Toast
@@ -18,8 +18,9 @@ class FirebaseFunctions {
     val COLLECTION_CATEGORIES = "categories";
 
 
-    fun addProduct(id: String, name: String, description: String, price: Double,
-        location: String, image: Int, categoryName: String
+    fun addProduct(
+        id: String, name: String, description: String, price: Double,
+        location: String, image: String, categoryName: String
     ) {
         val product = hashMapOf(
             "id" to id,
@@ -53,9 +54,16 @@ class FirebaseFunctions {
     }
 
 
-//    add id from authentication
-    fun addVisitor(name: String,email: String,phoneNumber: String,password: String,image: String) {
+    fun addVisitor(
+        id: String,
+        name: String,
+        email: String,
+        phoneNumber: String,
+        password: String,
+        image: String
+    ) {
         var visitor = hashMapOf(
+            "id" to id,
             "name" to name,
             "email" to email,
             "phoneNumber" to phoneNumber,
@@ -72,12 +80,10 @@ class FirebaseFunctions {
             }
     }
 
-    //  add condition
     fun getOneProducts(id: String): Product {
         var product: Product? = null
         db.collection(COLLECTION_PRODUCTS)
             .document(id)
-//            .whereEqualTo("id",id)
             .get()
             .addOnSuccessListener { document ->
                 product = Product(
@@ -117,24 +123,27 @@ class FirebaseFunctions {
         return arr
     }
 
-    fun getOneVisitor(id: String):Visitor {
-        var visitor:Visitor? = null
+    fun getOneVisitor(id: String): Visitor {
+        var visitor: Visitor? = null
         db.collection(COLLECTION_PRODUCTS)
-            .document(id)
+            .whereEqualTo("id", id)
+            .limit(1)
             .get()
-            .addOnSuccessListener { document ->
-                visitor = Visitor(
-                    document.id,
-                    document.getString("name")!!,
-                    document.getString("email")!!,
-                    document.getString("password")!!,
-                    document.getString("image")!!
-                )
-                Log.e(TAG, "Added Successfully")
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    visitor = Visitor(
+                        document.id,
+                        document.getString("name")!!,
+                        document.getString("email")!!,
+                        document.getString("password")!!,
+                        document.getString("image")!!
+                    )
+                    Log.e(TAG, "Added Successfully")
+                }
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
             }
-        return  visitor!!
+        return visitor!!
     }
 
     fun updateProduct(
@@ -178,8 +187,8 @@ class FirebaseFunctions {
     }
 
 
-    fun getOneAdmin(id: String):Admin {
-        var admin:Admin? = null
+    fun getOneAdmin(id: String): Admin {
+        var admin: Admin? = null
         db.collection(COLLECTION_PRODUCTS)
             .document(id)
             .get()
@@ -193,8 +202,9 @@ class FirebaseFunctions {
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
             }
-        return  admin!!
+        return admin!!
     }
+
     fun addAdmin(name: String, password: String) {
         var admin = hashMapOf("name" to name, "password" to password)
         db.collection(COLLECTION_ADMINS)
