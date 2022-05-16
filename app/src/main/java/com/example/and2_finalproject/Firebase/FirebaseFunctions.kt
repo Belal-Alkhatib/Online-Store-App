@@ -52,19 +52,8 @@ class FirebaseFunctions {
             }
     }
 
-    fun addAdmin(name: String, password: String) {
-        var admin = hashMapOf("name" to name, "password" to password)
-        db.collection(COLLECTION_ADMINS)
-            .add(admin)
-            .addOnSuccessListener { documentReference ->
-                Log.e(TAG, "Added Successfully")
-            }
-            .addOnFailureListener {
-                Log.e(TAG, it.message.toString())
-            }
-    }
 
-
+//    add id from authentication
     fun addVisitor(name: String,email: String,phoneNumber: String,password: String,image: String) {
         var visitor = hashMapOf(
             "name" to name,
@@ -83,11 +72,12 @@ class FirebaseFunctions {
             }
     }
 
-    //  get
+    //  add condition
     fun getOneProducts(id: String): Product {
         var product: Product? = null
         db.collection(COLLECTION_PRODUCTS)
             .document(id)
+//            .whereEqualTo("id",id)
             .get()
             .addOnSuccessListener { document ->
                 product = Product(
@@ -97,7 +87,7 @@ class FirebaseFunctions {
                     document.getDouble("price")!!,
                     document.getString("location")!!,
                     document.getString("image")!!,
-                    document.getString("categoryName")!!,
+                    document.getString("categoryName")!!
                 )
                 Log.e(TAG, "Added Successfully")
             }.addOnFailureListener { error ->
@@ -147,25 +137,6 @@ class FirebaseFunctions {
         return  visitor!!
     }
 
-    fun getOneAdmin(id: String):Admin {
-        var admin:Admin? = null
-        db.collection(COLLECTION_PRODUCTS)
-            .document(id)
-            .get()
-            .addOnSuccessListener { document ->
-                 admin = Admin(
-                    document.id,
-                    document.getString("name")!!,
-                    document.getString("password")!!
-                )
-                Log.e(TAG, "Added Successfully")
-            }.addOnFailureListener { error ->
-                Log.e("hzm", error.message.toString())
-            }
-        return  admin!!
-    }
-
-
     fun updateProduct(
         oldId: String, name: String, description: String, price: Double,
         location: String, image: String, categoryName: String
@@ -205,5 +176,36 @@ class FirebaseFunctions {
             }
         return status
     }
+
+
+    fun getOneAdmin(id: String):Admin {
+        var admin:Admin? = null
+        db.collection(COLLECTION_PRODUCTS)
+            .document(id)
+            .get()
+            .addOnSuccessListener { document ->
+                admin = Admin(
+                    document.id,
+                    document.getString("name")!!,
+                    document.getString("password")!!
+                )
+                Log.e(TAG, "Added Successfully")
+            }.addOnFailureListener { error ->
+                Log.e("hzm", error.message.toString())
+            }
+        return  admin!!
+    }
+    fun addAdmin(name: String, password: String) {
+        var admin = hashMapOf("name" to name, "password" to password)
+        db.collection(COLLECTION_ADMINS)
+            .add(admin)
+            .addOnSuccessListener { documentReference ->
+                Log.e(TAG, "Added Successfully")
+            }
+            .addOnFailureListener {
+                Log.e(TAG, it.message.toString())
+            }
+    }
+
 
 }
