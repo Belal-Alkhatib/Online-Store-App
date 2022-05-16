@@ -15,12 +15,14 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         auth = FirebaseAuth.getInstance()
         //val auth = Firebase.auth
+        binding.btnSignUp.setOnClickListener {
+            authSingUp(binding.etEmail.text.toString(),binding.etPassword.text.toString())
+        }
     }
          private fun authSingUp(email:String ,password:String) {
-
+             Log.e( "authSingUp: ",email )
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

@@ -16,6 +16,9 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
+        binding.btnSignin.setOnClickListener {
+            authLogin(binding.etEmail.text.toString(),binding.etPassword.text.toString())
+        }
     }
 
     private fun authLogin(email: String, password: String) {
