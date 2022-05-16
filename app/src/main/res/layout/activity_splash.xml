@@ -8,7 +8,7 @@
     tools:context=".Splash">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_category"
         android:layout_width="350dp"
         android:layout_height="344dp"
         app:layout_constraintBottom_toBottomOf="parent"

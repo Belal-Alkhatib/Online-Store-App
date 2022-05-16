@@ -19,11 +19,10 @@ class FirebaseFunctions {
 
 
     fun addProduct(
-        id: String, name: String, description: String, price: Double,
+        name: String, description: String, price: Double,
         location: String, image: String, categoryName: String
     ) {
         val product = hashMapOf(
-            "id" to id,
             "name" to name,
             "description" to description,
             "price" to price,
@@ -47,6 +46,7 @@ class FirebaseFunctions {
             .add(category)
             .addOnSuccessListener { documentReference ->
                 Log.e(TAG, "Added Successfully")
+                documentReference.id
             }
             .addOnFailureListener {
                 Log.e(TAG, it.message.toString())
@@ -108,7 +108,7 @@ class FirebaseFunctions {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot) {
-                    var id = document.getString("id")!!
+                    var id = document.id
                     var name = document.getString("name")!!
                     var description = document.getString("description")!!
                     var price = document.getDouble("price")!!
@@ -116,6 +116,23 @@ class FirebaseFunctions {
                     var image = document.getString("image")!!
                     var categoryName = document.getString("categoryName")!!
                     arr.add(Product(id, name, description, price, location, image, categoryName))
+                }
+            }.addOnFailureListener { error ->
+                Log.e("hzm", error.message.toString())
+            }
+        return arr
+    }
+
+    fun getAllCategories(): ArrayList<Category> {
+        val arr = ArrayList<Category>()
+        db.collection(COLLECTION_PRODUCTS)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    var id = document.id
+                    var name = document.getString("name")!!
+                    var description = document.getString("description")!!
+                    arr.add(Category(id, name, description))
                 }
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
@@ -163,6 +180,21 @@ class FirebaseFunctions {
         db.collection(COLLECTION_PRODUCTS).document(oldId).update(product)
             .addOnSuccessListener {
                 Log.e(TAG, "Updated Successfully")
+                status = true
+            }.addOnFailureListener { exception ->
+                Log.e(TAG, exception.message.toString())
+                status = false
+            }
+        return status
+    }
+
+
+    fun deleteCategoryById(id: String): Boolean {
+        var status = true
+        db.collection(COLLECTION_CATEGORIES).document(id)
+            .delete()
+            .addOnSuccessListener {
+                Log.e(TAG, "Deleted Successfully")
                 status = true
             }.addOnFailureListener { exception ->
                 Log.e(TAG, exception.message.toString())
