@@ -1,20 +1,22 @@
 package com.example.and2_finalproject
 
+import android.R
 import android.app.ProgressDialog
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.and2_finalproject.databinding.ActivityAddCategoryBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.example.and2_finalproject.databinding.ActivityAddProductBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
+
 
 class AddProduct : AppCompatActivity() {
     private var progressDialog: ProgressDialog? = null
@@ -30,17 +32,26 @@ class AddProduct : AppCompatActivity() {
         val imageRef = storageRef.child("images")
 
         val firebaseFunctions = FirebaseFunctions()
+        val categories = firebaseFunctions.getAllCategories()
+        val categoriesNames = ArrayList<String>()
+        for(category in categories){
+            categoriesNames.add(category.name)
+        }
+
+        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, categoriesNames)
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        binding.spCategories.adapter = adapter
 
 
         binding.imgProduct.setOnClickListener {
             getContent.launch("image/*")
         }
-
         binding.btnSave.setOnClickListener {
             val name = binding.tvName.text.toString()
             val description = binding.tvDescription.text.toString()
             val price = binding.tvPrice.text.toString()
             val location = binding.tvLocation.text.toString()
+            val category = binding.spCategories.selectedItem.toString()
 
             if (name.isNotEmpty() && description.isNotEmpty() &&
                 price.isNotEmpty() && location.isNotEmpty()
@@ -65,18 +76,21 @@ class AddProduct : AppCompatActivity() {
                     Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
                     childRef.downloadUrl.addOnSuccessListener { uri ->
 
-// TODO: add categories
                         firebaseFunctions.addProduct(
                             name,
                             description,
                             price.toDouble(),
                             location,
+                            bought = 0,
+                            rate = 0.0,
                             uri!!.toString(),
-                            ""
+                            category
                         )
                     }
                     hideDialog()
                 }
+            }else{
+                Toast.makeText(this, "Please fill the data", Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.and2_finalproject.ShowDetailsShop
 import com.example.and2_finalproject.databinding.ProductCardViewBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Product
@@ -35,10 +36,10 @@ class ProductAdapter(var data: ArrayList<Product>): RecyclerView.Adapter<Product
         }
 
 
-        /*holder.cardViewBinding.root.setOnClickListener {
-            ProductDetails.productData = data[position]
-            context.startActivity(Intent(context,ProductDetails::class.java))
-        }*/
+        holder.cardViewBinding.root.setOnClickListener {
+            ShowDetailsShop.productData = data[position]
+            context.startActivity(Intent(context,ShowDetailsShop::class.java))
+        }
 
     }
 

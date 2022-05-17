@@ -15,6 +15,9 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        startActivity(Intent(this,AddProduct::class.java))
+
         auth = FirebaseAuth.getInstance()
         //val auth = Firebase.auth
         binding.btnSignUp.setOnClickListener {

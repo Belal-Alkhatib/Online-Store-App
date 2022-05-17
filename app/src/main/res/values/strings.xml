@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">And2_FinalProject</string>
+    <array name="Categories">
+        <item>Books</item>
+        <item>Cloths</item>
+        <item>Electronic</item>
+    </array>
 </resources>
