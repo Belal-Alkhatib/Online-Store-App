@@ -19,7 +19,7 @@ class SignUpActivity : AppCompatActivity() {
 
         val firebaseFun = FirebaseFunctions()
 
-        //startActivity(Intent(this,AddProduct::class.java)) // --> what is that
+        //startActivity(Intent(this,MainActivity::class.java)) // --> what is that
 
 
         binding.btnAdmin.setOnClickListener {

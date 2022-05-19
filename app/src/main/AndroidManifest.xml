@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.And2_FinalProject">
         <activity
-            android:name=".dashboard"
+            android:name=".Dashboard"
             android:exported="false" />
         <activity
             android:name=".Splash"
@@ -35,7 +35,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ShowDetailsShop"
+            android:name=".ShowProductDetails"
             android:exported="false"></activity>
         <activity
             android:name=".AddCategory"

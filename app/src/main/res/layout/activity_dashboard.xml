@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:padding="16dp"
-    tools:context=".dashboard">
+    tools:context=".Dashboard">
 
 
     <androidx.cardview.widget.CardView
@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_total_salary"
+                android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,7 +63,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_total_salary" />
+                app:layout_constraintStart_toEndOf="@+id/tv_total_price" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,7 +104,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_num_of_item"
+                android:id="@+id/tv_total_sold_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -154,6 +154,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/btn_popular"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -192,6 +193,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_search"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -230,6 +232,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

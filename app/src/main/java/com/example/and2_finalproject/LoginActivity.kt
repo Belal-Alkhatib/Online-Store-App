@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import com.example.and2_finalproject.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -30,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
                 val password = binding.etPassword.text.toString()
 
                 if(email == "admin" && password == "admin"){ // اذا تحقق هذا الشرط يكون مسجل الدخول أدمن
-                    val i = Intent(this, dashboard::class.java)
+                    val i = Intent(this, Dashboard::class.java)
                     startActivity(i)
                 }else{
                     authLogin(email,password)

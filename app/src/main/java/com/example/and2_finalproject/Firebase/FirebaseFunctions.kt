@@ -8,6 +8,8 @@ import com.example.and2_finalproject.model.Product
 import com.example.and2_finalproject.model.Visitor
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class FirebaseFunctions {
     var db = FirebaseFirestore.getInstance()
@@ -21,15 +23,16 @@ class FirebaseFunctions {
 
     //category
     fun addCategory(name: String, description: String) {
+        var db = FirebaseFirestore.getInstance()
         val category = hashMapOf("name" to name, "description" to description)
         db.collection(COLLECTION_CATEGORIES)
             .add(category)
             .addOnSuccessListener { documentReference ->
-                Log.e(TAG, "Added Successfully")
-                documentReference.id
+                Log.e("hzm", "Added Successfully ${documentReference.id}")
+
             }
             .addOnFailureListener {
-                Log.e(TAG, it.message.toString())
+                Log.e("hzm", it.message.toString())
             }
     }
 
@@ -49,7 +52,7 @@ class FirebaseFunctions {
 
     fun getAllCategories(): ArrayList<Category> {
         val arr = ArrayList<Category>()
-        db.collection(COLLECTION_PRODUCTS)
+        db.collection(COLLECTION_CATEGORIES)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot) {
@@ -168,7 +171,7 @@ class FirebaseFunctions {
 
     fun deleteProductById(id: String): Boolean {
         var status = true
-        db.collection("product").document(id)
+        db.collection(COLLECTION_PRODUCTS).document(id)
             .delete()
             .addOnSuccessListener { it ->
                 Log.e(TAG, "Deleted Successfully")
