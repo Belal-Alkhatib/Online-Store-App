@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+
         >
 
         <TextView
@@ -75,6 +76,7 @@
                     android:background="@drawable/btn_white_background"
                     android:drawableLeft="@drawable/ic_admin24"
                     android:drawableTint="@android:color/white"
+                    android:layout_marginTop="20dp"
                     android:padding="10dp"
 
                     />

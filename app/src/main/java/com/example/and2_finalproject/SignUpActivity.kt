@@ -21,6 +21,12 @@ class SignUpActivity : AppCompatActivity() {
 
         //startActivity(Intent(this,AddProduct::class.java)) // --> what is that
 
+
+        binding.btnAdmin.setOnClickListener {
+            val i = Intent(this,LoginActivity::class.java)
+            startActivity(i)
+        }
+
         binding.tvLoginLink.setOnClickListener {
             val i = Intent(this,LoginActivity::class.java)
             startActivity(i)
