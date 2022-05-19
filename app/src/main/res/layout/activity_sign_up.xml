@@ -44,17 +44,7 @@
             android:shadowColor="@android:color/darker_gray"
             android:layout_marginTop="30dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create an Account to Access Features. Sign Up With Email Address or Sign In With Your Admin Account"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight= "20dp"
-            android:layout_marginTop="8dp"
-            />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,19 +101,7 @@
                 android:gravity="center"
                 >
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_marginBottom="10dp"
-                    >
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_store" />
-                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -259,3 +237,18 @@
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create an Account to Access Features. Sign Up With Email Address or Sign In With Your Admin Account"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight= "20dp"
+            android:layout_marginTop="8dp"
+            />
+-->
