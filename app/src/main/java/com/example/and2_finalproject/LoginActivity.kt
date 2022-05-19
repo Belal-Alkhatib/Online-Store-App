@@ -16,10 +16,36 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
+
+        binding.tvSignUpLink.setOnClickListener {
+            val i = Intent(this,SignUpActivity::class.java)
+            startActivity(i)
+        }
+
+
         binding.btnSignin.setOnClickListener {
-            authLogin(binding.etEmail.text.toString(),binding.etPassword.text.toString())
+            if(binding.etEmail.text.isNotEmpty() && binding.etPassword.text.isNotEmpty()){
+
+                val email = binding.etEmail.text.toString()
+                val password = binding.etPassword.text.toString()
+
+                if(email == "admin" && password == "admin"){ // اذا تحقق هذا الشرط يكون مسجل الدخول أدمن
+                    val i = Intent(this, dashboard::class.java)
+                    startActivity(i)
+                }else{
+                    authLogin(email,password)
+                }
+
+
+            }else{
+                Toast.makeText(this, "Please Fill in The Required Fields", Toast.LENGTH_SHORT).show()
+
+            }
         }
     }
+
+
+    //authLogin(binding.etEmail.text.toString(),binding.etPassword.text.toString())
 
     private fun authLogin(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
@@ -28,7 +54,9 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.e("hzm", "signInWithEmail:success")
                     val user = auth.currentUser
-                    updateUI(user!!)
+
+                    val i = Intent(this,MainActivity::class.java)
+                    startActivity(i)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.e("hzm", "signInWithEmail:failure", task.exception)
@@ -41,18 +69,10 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null)
-            updateUI(currentUser)
-    }
 
-    private fun updateUI(user: FirebaseUser) {
-        val i = Intent(this, MainActivity::class.java)
-        //i.putExtra("user",user)
-        startActivity(i)
+
     }
 
 
-}
+
+

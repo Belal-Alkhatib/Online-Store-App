@@ -188,7 +188,6 @@ class FirebaseFunctions {
         id: String,
         name: String,
         email: String,
-        phoneNumber: String,
         password: String,
         image: String
     ) {
@@ -196,7 +195,6 @@ class FirebaseFunctions {
             "id" to id,
             "name" to name,
             "email" to email,
-            "phoneNumber" to phoneNumber,
             "password" to password,
             "image" to image
         )
