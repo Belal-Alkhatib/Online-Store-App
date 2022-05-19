@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
-    android:id="@+id/first">
+    android:id="@+id/home">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

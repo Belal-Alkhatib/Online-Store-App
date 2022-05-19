@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = binding.bottomNavigationView
         val navController = findNavController(R.id.fragment)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.third,R.id.first,R.id.second))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.search,R.id.home,R.id.profile))
         setupActionBarWithNavController(navController,appBarConfiguration)
 
         bottomNav.setupWithNavController(navController)
