@@ -1,16 +1,13 @@
 package com.example.and2_finalproject
 
 import android.app.ProgressDialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.and2_finalproject.adapter.ProductAdapter
 import com.example.and2_finalproject.databinding.ActivityMainBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
@@ -26,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = binding.bottomNavigationView
         val navController = findNavController(R.id.fragment)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.home,R.id.product,  R.id.profile ,R.id.category))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.home,R.id.rvCategory,  R.id.profile ,R.id.category))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNav.setupWithNavController(navController)
