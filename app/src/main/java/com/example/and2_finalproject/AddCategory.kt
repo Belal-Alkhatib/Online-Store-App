@@ -17,6 +17,7 @@ class AddCategory : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             if(binding.tvName.text.isNotEmpty() && binding.tvDescription.text.isNotEmpty()){
                 firebaseFunctions.addCategory(binding.tvName.text.toString(),binding.tvDescription.text.toString())
+                finish()
             }
         }
     }

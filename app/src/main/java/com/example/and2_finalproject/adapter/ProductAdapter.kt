@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.and2_finalproject.LoginActivity
 import com.example.and2_finalproject.ShowProductDetails
 import com.example.and2_finalproject.databinding.ProductCardViewBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
@@ -31,6 +33,10 @@ class ProductAdapter(var data: ArrayList<Product>): RecyclerView.Adapter<Product
             tvName.text = data[position].name
             tvPrice.text = data[position].price.toString()
             Picasso.get().load(data[position].image).into(imgProduct);
+        }
+
+        if (!LoginActivity.isAdmin) {
+            holder.cardViewBinding.btnDelete.visibility = View.INVISIBLE
         }
 
         holder.cardViewBinding.btnDelete.setOnClickListener {

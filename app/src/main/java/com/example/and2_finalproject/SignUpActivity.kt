@@ -77,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
                             .set(visitor)
                             .addOnSuccessListener { documentReference ->
                                 Log.e("hzm", "Added Successfully $userId")
-                                val i = Intent(this,ProfileActivity::class.java)
+                                val i = Intent(this,MainActivity::class.java)
                                 startActivity(i)
                                 finish()
                             }

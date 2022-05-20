@@ -1,6 +1,7 @@
 package com.example.and2_finalproject
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -97,10 +98,13 @@ class SearchFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error while retrieving data", Toast.LENGTH_SHORT).show()
             }
 
-//        binding.btnTest.setOnClickListener {
-//            val i = Intent(this,ProfileActivity::class.java)
-//            startActivity(i)
-//        }
+        if (!LoginActivity.isAdmin) {
+            binding.btnAdd.visibility = View.INVISIBLE
+        }
+
+        binding.btnAdd.setOnClickListener {
+            startActivity(Intent(requireContext(),AddProduct::class.java))
+        }
 
     }
 

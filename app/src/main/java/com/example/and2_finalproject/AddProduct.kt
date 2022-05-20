@@ -96,7 +96,6 @@ class AddProduct : AppCompatActivity() {
                             )
                         }
                         hideDialog()
-                        startActivity(Intent(this,MainActivity::class.java))
                         finish()
                     }
             } else {

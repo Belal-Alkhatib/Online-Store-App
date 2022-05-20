@@ -22,7 +22,7 @@ import java.io.ByteArrayOutputStream
 
 class ShowProductDetails : AppCompatActivity() {
 
-    lateinit var binding:ActivityShowProductDetailsBinding
+    lateinit var binding: ActivityShowProductDetailsBinding
     private var progressDialog: ProgressDialog? = null
 
     companion object {
@@ -47,6 +47,27 @@ class ShowProductDetails : AppCompatActivity() {
 
         binding.btnCanel.setOnClickListener {
             finish()
+        }
+
+        if (!LoginActivity.isAdmin) {
+            binding.btnEdit.visibility = View.INVISIBLE
+            binding.btnBuy.visibility = View.VISIBLE
+        }
+
+        binding.btnBuy.setOnClickListener {
+            val firebaseFunctions = FirebaseFunctions()
+            firebaseFunctions.updateProduct(
+                productData!!.id,
+                productData!!.name,
+                productData!!.description,
+                productData!!.price,
+                productData!!.location,
+                productData!!.bought + 1,
+                productData!!.rate,
+                productData!!.image,
+                productData!!.categoryName
+            )
+            binding.tvBought.text = (productData!!.bought + 1).toString()
         }
 
         binding.btnEdit.setOnClickListener {
@@ -116,10 +137,10 @@ class ShowProductDetails : AppCompatActivity() {
                         )
                     }
                     hideDialog()
-                    startActivity(Intent(this,MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
-            }else{
+            } else {
                 Toast.makeText(this, "Please fill the data", Toast.LENGTH_SHORT).show()
             }
 
