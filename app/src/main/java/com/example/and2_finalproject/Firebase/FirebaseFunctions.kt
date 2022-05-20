@@ -1,5 +1,6 @@
 package com.example.and2_finalproject.firebase
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.example.and2_finalproject.model.Admin
@@ -184,6 +185,11 @@ class FirebaseFunctions {
 
 
     //visitor
+    /**  بعض التعديلات على الدالة
+     * @Bilal
+    1. حذف الphone number
+     2. جع الid الخاص بالمستخدم هو نفسه الcurrent user
+     */
     fun addVisitor(
         id: String,
         name: String,
@@ -198,8 +204,8 @@ class FirebaseFunctions {
             "password" to password,
             "image" to image
         )
-        db.collection(COLLECTION_VISITORS)
-            .add(visitor)
+        db.collection(COLLECTION_VISITORS).document(id)
+            .set(visitor)
             .addOnSuccessListener { documentReference ->
                 Log.e(TAG, "Added Successfully")
             }
@@ -232,7 +238,26 @@ class FirebaseFunctions {
     }
 
 
+    /**
+    @Bilal
+     */
+     fun updateVisitor(context:Context, id: String, name: String, email: String, password: String, image: String){
+        val user = HashMap<String,Any>()
+        user["name"] = name
+        user["email"] = email
+        user["password"] = password
+        user["image"] = image
 
+        db.collection(COLLECTION_VISITORS).document(id)
+            .update(user)
+            .addOnSuccessListener {
+                Toast.makeText(context,"Yor Information Updated",Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(context,"Yor Information Didn't Updated",Toast.LENGTH_LONG).show()
+                Log.e(TAG, exception.message.toString())
+            }
+    }
 
     //Admin
     fun getOneAdmin(id: String): Admin {
@@ -264,6 +289,8 @@ class FirebaseFunctions {
                 Log.e(TAG, it.message.toString())
             }
     }
+
+
 
 
 }
