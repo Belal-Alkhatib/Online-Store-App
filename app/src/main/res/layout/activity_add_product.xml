@@ -50,7 +50,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/main_color"
         android:hint="Price"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:textColor="@color/main_color"
         android:textColorHint="@color/third_color"
         android:textSize="20sp"
@@ -113,10 +113,14 @@
 
     <Spinner
         android:id="@+id/sp_categories"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:entries="@array/Categories"
+        android:minHeight="48dp"
+        android:spinnerMode="dialog"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
 

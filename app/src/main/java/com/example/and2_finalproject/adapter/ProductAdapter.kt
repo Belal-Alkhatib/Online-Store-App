@@ -1,11 +1,13 @@
 package com.example.and2_finalproject.adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.and2_finalproject.ShowDetailsShop
+import com.example.and2_finalproject.ShowProductDetails
 import com.example.and2_finalproject.databinding.ProductCardViewBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Product
@@ -13,7 +15,7 @@ import com.squareup.picasso.Picasso
 
 class ProductAdapter(var data: ArrayList<Product>): RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
     lateinit var context: Context
-    lateinit var firebaseFunctions: FirebaseFunctions
+    val firebaseFunctions =  FirebaseFunctions()
 
     class MyViewHolder(val cardViewBinding: ProductCardViewBinding): RecyclerView.ViewHolder(cardViewBinding.root)
 
@@ -32,13 +34,31 @@ class ProductAdapter(var data: ArrayList<Product>): RecyclerView.Adapter<Product
         }
 
         holder.cardViewBinding.btnDelete.setOnClickListener {
-            firebaseFunctions.deleteProductById(data[position].id)
+
+            AlertDialog.Builder(context).apply {
+                setTitle("Delete book")
+                setMessage("Are you sure that you want to delete this book?")
+                setPositiveButton("Yse"){
+                        _, _ ->
+                    if(firebaseFunctions.deleteProductById(data[position].id)){
+                        data.removeAt(position)
+                        notifyDataSetChanged()
+                    }
+
+                }
+                setCancelable(true)
+                setNegativeButton("No"){ dialogInterface: DialogInterface, _ ->
+                    dialogInterface.cancel()
+                }
+                create()
+                show()
+            }
         }
 
 
         holder.cardViewBinding.root.setOnClickListener {
-            ShowDetailsShop.productData = data[position]
-            context.startActivity(Intent(context,ShowDetailsShop::class.java))
+            ShowProductDetails.productData = data[position]
+            context.startActivity(Intent(context,ShowProductDetails::class.java))
         }
 
     }

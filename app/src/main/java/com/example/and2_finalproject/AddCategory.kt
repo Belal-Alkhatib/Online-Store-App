@@ -2,6 +2,7 @@ package com.example.and2_finalproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.and2_finalproject.databinding.ActivityAddCategoryBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 

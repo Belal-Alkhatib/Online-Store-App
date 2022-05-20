@@ -1,7 +1,9 @@
 package com.example.and2_finalproject
 
 import android.R
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -13,6 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.and2_finalproject.databinding.ActivityAddProductBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
+import com.example.and2_finalproject.model.Category
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
@@ -32,16 +36,23 @@ class AddProduct : AppCompatActivity() {
         val imageRef = storageRef.child("images")
 
         val firebaseFunctions = FirebaseFunctions()
-        val categories = firebaseFunctions.getAllCategories()
         val categoriesNames = ArrayList<String>()
-        for(category in categories){
-            categoriesNames.add(category.name)
-        }
 
-        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, categoriesNames)
-        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
-        binding.spCategories.adapter = adapter
-
+        firebaseFunctions.db.collection(firebaseFunctions.COLLECTION_CATEGORIES)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    val id = document.id
+                    val name = document.getString("name")!!
+                    val description = document.getString("description")!!
+                    categoriesNames.add(name)
+                    val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, categoriesNames)
+                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+                    binding.spCategories.adapter = adapter
+                }
+            }.addOnFailureListener { error ->
+                Log.e("hzm", error.message.toString())
+            }
 
         binding.imgProduct.setOnClickListener {
             getContent.launch("image/*")
@@ -68,28 +79,27 @@ class AddProduct : AppCompatActivity() {
                 uploadTask.addOnFailureListener { exception ->
                     Log.e("hzm", exception.message!!)
                     hideDialog()
-                    // Handle unsuccessful uploads
-                }.addOnSuccessListener {
-                    // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-                    // ...
-                    Log.e("hzm", "Image Uploaded Successfully")
-                    Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
-                    childRef.downloadUrl.addOnSuccessListener { uri ->
-
-                        firebaseFunctions.addProduct(
-                            name,
-                            description,
-                            price.toDouble(),
-                            location,
-                            bought = 0,
-                            rate = 0.0,
-                            uri!!.toString(),
-                            category
-                        )
-                    }
-                    hideDialog()
                 }
-            }else{
+                    .addOnSuccessListener {
+                        Log.e("hzm", "Image Uploaded Successfully")
+                        childRef.downloadUrl.addOnSuccessListener { uri ->
+
+                            firebaseFunctions.addProduct(
+                                name,
+                                description,
+                                price.toDouble(),
+                                location,
+                                bought = 0,
+                                rate = 0.0,
+                                uri!!.toString(),
+                                category
+                            )
+                        }
+                        hideDialog()
+                        startActivity(Intent(this,MainActivity::class.java))
+                        finish()
+                    }
+            } else {
                 Toast.makeText(this, "Please fill the data", Toast.LENGTH_SHORT).show()
             }
         }
@@ -113,6 +123,20 @@ class AddProduct : AppCompatActivity() {
     private fun hideDialog() {
         if (progressDialog!!.isShowing)
             progressDialog!!.dismiss()
+    }
+    @SuppressLint("MissingPermission")
+    private  fun  getLocationUser(){
+        val locationClient = LocationServices.getFusedLocationProviderClient(this)
+        locationClient.lastLocation
+            .addOnSuccessListener {location->
+                if (location != null){
+                    val lat = location.latitude
+                    val lon = location.longitude
+                    val provider = location.provider
+                }
+            }.addOnFailureListener{ exception ->
+                Log.e("TAG", exception.message.toString() )
+            }
     }
 
 }

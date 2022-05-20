@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ShowDetailsShop">
+    tools:context=".ShowProductDetails">
 
 <!--    <ScrollView-->
 <!--        android:layout_width="0dp"-->
@@ -36,7 +36,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Show Details"
@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/textview_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -61,8 +61,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/imgShop" />
 
 
+            <EditText
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:enabled="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textview_name"
+                app:layout_constraintEnd_toStartOf="@+id/tv_price"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textview_name" />
+
             <TextView
-                android:id="@+id/tv_description"
+                android:id="@+id/textview_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -73,22 +90,38 @@
                 android:textColor="@color/gray"
                 android:textSize="16sp"
                 android:textStyle="normal"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+                app:layout_constraintTop_toBottomOf="@+id/textview_name" />
 
 
-            <TextView
+            <EditText
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:enabled="false"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/gray"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textview_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textview_description" />
+
+            <EditText
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="20$"
                 android:textColor="#E91E63"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_name"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textview_name"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
@@ -148,6 +181,7 @@
                 android:id="@+id/tv_bought"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:text="05"
                 android:textColor="#E91E63"
                 android:textSize="18dp"
@@ -160,6 +194,7 @@
                 android:id="@+id/tv_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:text="3.8"
                 android:textColor="#E91E63"
                 android:textSize="18dp"
@@ -171,6 +206,7 @@
                 android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:text="Books"
                 android:textColor="#E91E63"
                 android:textSize="18dp"
@@ -179,14 +215,36 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
-                android:id="@+id/btn_edit"
+                android:id="@+id/btn_canel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_btn_primary"
                 android:text="cancel"
                 android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_btn_primary"
+                android:text="edit"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_btn_primary"
+                android:text="save"
+                android:textColor="@color/white"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
