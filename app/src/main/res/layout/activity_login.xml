@@ -67,7 +67,9 @@
                 android:inputType="textWebEmailAddress"
                 android:paddingRight="10dp"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:background="@drawable/input_text_bacground"
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -86,7 +88,10 @@
                 android:inputType="textPassword"
                 android:paddingRight="10dp"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:background="@drawable/input_text_bacground"
+
+                />
 
             <com.balysv.materialripple.MaterialRippleLayout
                 style="@style/RippleStyleGrayWight"
@@ -98,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="0dp"
-                    android:layout_marginTop="165dp"
+                    android:layout_marginTop="160dp"
                     android:background="@drawable/btn_gradient"
                     android:text="Sign in"
                     android:textColor="@android:color/white"

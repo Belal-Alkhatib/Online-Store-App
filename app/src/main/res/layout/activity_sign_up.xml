@@ -125,6 +125,8 @@
                     android:textSize="16sp"
                     android:drawableRight="@drawable/ic_person"
                     android:paddingRight="10dp"
+                    android:background="@drawable/input_text_bacground"
+
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -145,6 +147,8 @@
                     android:textColor="@android:color/darker_gray"
                     android:drawableRight="@drawable/ic_email"
                     android:paddingRight="10dp"
+                    android:background="@drawable/input_text_bacground"
+
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -165,6 +169,8 @@
                     android:textColor="@android:color/darker_gray"
                     android:drawableRight="@drawable/ic_password"
                     android:paddingRight="10dp"
+                    android:background="@drawable/input_text_bacground"
+
                     />
 
 <RelativeLayout
