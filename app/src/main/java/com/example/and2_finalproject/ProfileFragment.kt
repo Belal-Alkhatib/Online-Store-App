@@ -29,20 +29,61 @@ class ProfileFragment : Fragment() {
     var db = FirebaseFirestore.getInstance()
     private var progressDialog: ProgressDialog? = null
     lateinit var auth: FirebaseAuth
-    private var URI_IMAGE: Uri? = null //5.1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        auth = FirebaseAuth.getInstance()
+
+        if(LoginActivity.isAdmin){
+            binding.btnEdit.visibility = View.INVISIBLE
+            binding.tvname.setText("Admin")
+            binding.etEmail.setText("Admin@gmail.com")
+            binding.etPassword.setText("admin")
+        }else {
+
+            val userId = auth.currentUser!!.uid
+            var visitor: Visitor? = null
+            db.collection("Visitors")
+                .whereEqualTo("id", userId)
+                .limit(1)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot) {
+                        visitor = Visitor(
+                            document.id,
+                            document.getString("name")!!,
+                            document.getString("email")!!,
+                            document.getString("password")!!,
+                            document.getString("image")!!
+                        )
+                        Log.e("hzm", "Added Successfully")
+
+                        binding.tvname.setText(visitor!!.name)
+                        binding.etEmail.setText(visitor!!.email)
+                        binding.etPassword.setText(visitor!!.password)
+                        Log.e("bil", visitor.toString())
+                        if (visitor!!.image == "") {
+                            binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
+                        } else {
+                            Picasso.get().load(visitor!!.image).into(binding.personImage);
+                        }
+                    }
+
+                }.addOnFailureListener { error ->
+                    Log.e("hzm", error.message.toString())
+                }
+
+        }
         return binding.root
     }
 
 
     override fun onResume() {
         super.onResume()
-        auth = FirebaseAuth.getInstance()
+
 
         val storage = Firebase.storage
         val storageRef = storage.reference
@@ -86,7 +127,6 @@ class ProfileFragment : Fragment() {
                     Log.e("hzm", "Image Uploaded Successfully")
                     Toast.makeText(requireContext(), "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
                     childRef.downloadUrl.addOnSuccessListener { uri ->
-                        URI_IMAGE = uri
                         firebaseFunctions.updateVisitor(
                             requireContext(),
                             userId,
@@ -114,45 +154,6 @@ class ProfileFragment : Fragment() {
         binding.btnCamera.setOnClickListener {
             getContent.launch("image/*")
         }
-
-
-        val userId = auth.currentUser!!.uid
-        Log.e("hzm", "onStart: $userId" )
-        //val visitor = getOneVisitor(userId)
-
-        var visitor: Visitor? = null
-        db.collection("Visitors")
-            .whereEqualTo("id", userId)
-            .limit(1)
-            .get()
-            .addOnSuccessListener { querySnapshot ->
-                for (document in querySnapshot) {
-                    visitor = Visitor(
-                        document.id,
-                        document.getString("name")!!,
-                        document.getString("email")!!,
-                        document.getString("password")!!,
-                        document.getString("image")!!
-                    )
-                    Log.e("hzm", "Added Successfully")
-
-                    binding.tvname.setText(visitor!!.name)
-                    binding.etEmail.setText(visitor!!.email)
-                    binding.etPassword.setText(visitor!!.password)
-                    Log.e("bil", visitor.toString())
-                    if (visitor!!.image == "") {
-                        binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
-                    } else {
-                        Picasso.get().load(visitor!!.image).into(binding.personImage);
-                    }
-                }
-
-            }.addOnFailureListener { error ->
-                Log.e("hzm", error.message.toString())
-            }
-
-
-
 
     }
 

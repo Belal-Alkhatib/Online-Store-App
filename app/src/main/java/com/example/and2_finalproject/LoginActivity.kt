@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
                 if(email == "admin" && password == "admin"){ // اذا تحقق هذا الشرط يكون مسجل الدخول أدمن
                     isAdmin = true
-                    val intent = Intent(this, Dashboard::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }else{

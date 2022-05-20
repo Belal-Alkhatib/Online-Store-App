@@ -1,18 +1,28 @@
 package com.example.and2_finalproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.and2_finalproject.databinding.ActivityDashboardBinding
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.and2_finalproject.databinding.FragmentDashboardBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Product
 
-class Dashboard : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityDashboardBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+class DashboardFragment : Fragment() {
+    lateinit var binding: FragmentDashboardBinding
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         val firebaseFunctions = FirebaseFunctions()
 
@@ -48,17 +58,18 @@ class Dashboard : AppCompatActivity() {
             }
 
         binding.btnProfile.setOnClickListener {
-            startActivity(Intent(this,ProfileActivity::class.java))
+            //startActivity(Intent(this,ProfileActivity::class.java))
         }
 
         binding.btnSearch.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            //startActivity(Intent(this,MainActivity::class.java))
 
         }
 
         binding.btnPopular.setOnClickListener {
 
         }
-
     }
+
+
 }

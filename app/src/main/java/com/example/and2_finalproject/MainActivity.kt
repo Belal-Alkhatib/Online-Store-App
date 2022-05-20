@@ -14,7 +14,7 @@ import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Product
 
 class MainActivity : AppCompatActivity() {
-    private var progressDialog: ProgressDialog? = null
+   // private var progressDialog: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.setupWithNavController(navController)
 
-        showDialog()
+       // showDialog()
         val firebaseFunctions = FirebaseFunctions()
         val productsArr = ArrayList<Product>()
         firebaseFunctions.db.collection(firebaseFunctions.COLLECTION_PRODUCTS)
@@ -61,10 +61,10 @@ class MainActivity : AppCompatActivity() {
                 val productsAdapter = ProductAdapter(productsArr)
 //                binding.rvProducts.layoutManager = GridLayoutManager(this, 2)
 //                binding.rvProducts.adapter = productsAdapter
-                hideDialog()
+               // hideDialog()
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
-                hideDialog()
+               // hideDialog()
                 Toast.makeText(this, "Error while retrieving data", Toast.LENGTH_SHORT).show()
             }
 
@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
     }
+    /*
     private fun showDialog() {
         progressDialog = ProgressDialog(this)
         progressDialog!!.setMessage("Uploading image ...")
@@ -84,5 +85,5 @@ class MainActivity : AppCompatActivity() {
     private fun hideDialog() {
         if (progressDialog!!.isShowing)
             progressDialog!!.dismiss()
-    }
+    }*/
 }
