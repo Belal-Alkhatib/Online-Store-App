@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.e("hzm", "signInWithEmail:success")
                     val user = auth.currentUser
 
-                    val i = Intent(this,MainActivity::class.java)
+                    val i = Intent(this,ProfileActivity::class.java)
                     startActivity(i)
                 } else {
                     // If sign in fails, display a message to the user.

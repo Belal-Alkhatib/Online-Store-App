@@ -45,7 +45,9 @@
             android:exported="false" />
         <activity
             android:name=".AddProduct"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" >

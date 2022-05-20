@@ -11,7 +11,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.and2_finalproject.databinding.ActivityProfileBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
+import com.example.and2_finalproject.model.Visitor
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
@@ -20,6 +22,8 @@ import java.io.ByteArrayOutputStream
 class ProfileActivity : AppCompatActivity() {
     val firebaseFunctions = FirebaseFunctions()
     lateinit var binding:ActivityProfileBinding
+    var db = FirebaseFirestore.getInstance()
+
     lateinit var auth: FirebaseAuth
     private var URI_IMAGE: Uri? = null //5.1
 
@@ -94,19 +98,41 @@ class ProfileActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val userId = auth.currentUser.toString()
-        val visitor = firebaseFunctions.getOneVisitor(userId)
+        val visitor = getOneVisitor(userId)
 
         binding.tvname.setText(visitor.name)
         binding.etEmail.setText(visitor.email)
         binding.etPassword.setText(visitor.password)
 
         Log.e("bil",visitor.toString())
-        if(visitor.image == null){
+        if(visitor.image == ""){
             binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
         }else{
             Picasso.get().load(URI_IMAGE).into(binding.personImage);
         }
 
 
+    }
+    private fun getOneVisitor(id: String): Visitor {
+        var visitor: Visitor? = null
+        db.collection("Visitors")
+            .whereEqualTo("id", id)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    visitor = Visitor(
+                        document.id,
+                        document.getString("name")!!,
+                        document.getString("email")!!,
+                        document.getString("password")!!,
+                        document.getString("image")!!
+                    )
+                    Log.e("hzm", "Added Successfully")
+                }
+            }.addOnFailureListener { error ->
+                Log.e("hzm", error.message.toString())
+            }
+        return visitor!!
     }
 }
