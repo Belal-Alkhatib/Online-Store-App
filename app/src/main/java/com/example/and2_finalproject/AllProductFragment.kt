@@ -45,8 +45,8 @@ class SearchFragment : Fragment() {
          when (spennerChecked){
              "Category Name" ->  whereCategoryName(search)
              "Product Name" -> whereProductName(search)
-             "Price" -> wherePrice(search)
-             "Rate" -> whereRate(search)
+             "Price" -> wherePrice(search.toInt())
+             "Rate" -> whereRate(search.toInt())
              else -> Toast.makeText(requireContext(), "Please Select a Operation", Toast.LENGTH_SHORT).show()
 
          }
@@ -89,7 +89,7 @@ class SearchFragment : Fragment() {
                     )
                 }
                 val productsAdapter = ProductAdapter(productsArr)
-                binding.rvProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvProducts.adapter = productsAdapter
                 hideDialog()
             }.addOnFailureListener { error ->
@@ -125,7 +125,7 @@ class SearchFragment : Fragment() {
         //**********
         val productList = ArrayList<Product>()
 
-        db.collection("products").whereGreaterThan("categoryName",categoryName)
+        db.collection("products").whereEqualTo("categoryName",categoryName)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){
@@ -162,7 +162,7 @@ class SearchFragment : Fragment() {
         //**********
         val productList = ArrayList<Product>()
 
-        db.collection("products").whereGreaterThan("name",productName)
+        db.collection("products").whereEqualTo("name",productName)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){
@@ -192,11 +192,11 @@ class SearchFragment : Fragment() {
             }
         //**********
     }
-    private fun wherePrice(price:String){
+    private fun wherePrice(price:Int){
         //**********
         val productList = ArrayList<Product>()
 
-        db.collection("products").whereGreaterThan("price",price)
+        db.collection("products").whereEqualTo("price",price)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){
@@ -226,11 +226,11 @@ class SearchFragment : Fragment() {
             }
         //**********
     }
-    private fun whereRate(rate:String){
+    private fun whereRate(rate:Int){
         //**********
         val productList = ArrayList<Product>()
 
-        db.collection("products").whereGreaterThan("rate",rate)
+        db.collection("products").whereEqualTo("rate",rate)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){
