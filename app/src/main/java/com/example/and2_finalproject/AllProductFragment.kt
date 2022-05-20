@@ -40,9 +40,9 @@ class SearchFragment : Fragment() {
      if(binding.tvSearch.text.isNotEmpty()){
          val search = binding.tvSearch.text.toString()
          var spennerChecked = binding.spinner.selectedItem
-
+//
          when (spennerChecked){
-             "Category Name" -> whereCategoryName(search)
+             "Category Name" ->  whereCategoryName(search)
              "Product Name" -> whereProductName(search)
              "Price" -> wherePrice(search)
              "Rate" -> whereRate(search)
@@ -117,6 +117,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun whereCategoryName(categoryName:String){
+        Log.e("bil","Category Name")
         //**********
         val productList = ArrayList<Product>()
 
@@ -137,6 +138,7 @@ class SearchFragment : Fragment() {
                     var pro = Product(id, name, description, price, location, bought, rate, img, categoryName )
 
                     productList.add(pro)
+
                     Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
 
                     val employeeAdapter = ProductAdapter(productList)
@@ -144,6 +146,8 @@ class SearchFragment : Fragment() {
                     binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
 
                 }
+                Log.e("bil",productList.toString())
+
             }
             .addOnFailureListener { exception ->
 
