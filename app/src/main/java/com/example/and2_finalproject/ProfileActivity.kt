@@ -1,5 +1,6 @@
 package com.example.and2_finalproject
 
+import android.app.ProgressDialog
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -20,6 +21,7 @@ import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
 
 class ProfileActivity : AppCompatActivity() {
+    private var progressDialog: ProgressDialog? = null
     val firebaseFunctions = FirebaseFunctions()
     lateinit var binding: ActivityProfileBinding
     var db = FirebaseFirestore.getInstance()
@@ -42,8 +44,9 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.btnEdit.setOnClickListener {
             binding.tvname.isEnabled = true
-            binding.etEmail.isEnabled = true
             binding.btnSave.visibility = View.VISIBLE
+            binding.btnEdit.visibility = View.INVISIBLE
+            binding.btnCamera.visibility = View.VISIBLE
 
         }
 
@@ -51,8 +54,9 @@ class ProfileActivity : AppCompatActivity() {
 
             if (binding.tvname.text.isNotEmpty() && binding.etEmail.text.isNotEmpty()) {
 
+                showDialog()
 
-                val userId = auth.currentUser.toString()
+                val userId = auth.currentUser!!.uid
                 val name = binding.tvname.text.toString()
                 val email = binding.etEmail.text.toString()
                 val password = binding.etPassword.text.toString()
@@ -66,7 +70,7 @@ class ProfileActivity : AppCompatActivity() {
                 var uploadTask = childRef.putBytes(data)
                 uploadTask.addOnFailureListener { exception ->
                     Log.e("hzm", exception.message!!)
-
+                    hideDialog()
                     // Handle unsuccessful uploads
                 }.addOnSuccessListener {
                     // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
@@ -86,6 +90,11 @@ class ProfileActivity : AppCompatActivity() {
                         binding.btnSave.visibility = View.GONE
 
                     }
+                    binding.tvname.isEnabled = false
+                    binding.btnSave.visibility = View.INVISIBLE
+                    binding.btnEdit.visibility = View.VISIBLE
+                    binding.btnCamera.visibility = View.INVISIBLE
+                    hideDialog()
 
                 }
             } else {
@@ -99,7 +108,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
 
-        val userId = auth.currentUser.toString()
+        val userId = auth.currentUser!!.uid
         Log.e("hzm", "onStart: $userId" )
         //val visitor = getOneVisitor(userId)
 
@@ -126,7 +135,7 @@ class ProfileActivity : AppCompatActivity() {
                     if (visitor!!.image == "") {
                         binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
                     } else {
-                        Picasso.get().load(URI_IMAGE).into(binding.personImage);
+                        Picasso.get().load(visitor!!.image).into(binding.personImage);
                     }
                 }
 
@@ -144,5 +153,17 @@ class ProfileActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             binding.personImage.setImageURI(uri)
         }
+
+    private fun showDialog() {
+        progressDialog = ProgressDialog(this)
+        progressDialog!!.setMessage("Uploading image ...")
+        progressDialog!!.setCancelable(false)
+        progressDialog!!.show()
+    }
+
+    private fun hideDialog() {
+        if (progressDialog!!.isShowing)
+            progressDialog!!.dismiss()
+    }
 
 }
