@@ -16,8 +16,13 @@
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/search"
+        android:id="@+id/product"
         android:name="com.example.and2_finalproject.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_all_product" />
+    <fragment
+        android:id="@+id/category"
+        android:name="com.example.and2_finalproject.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
 </navigation>

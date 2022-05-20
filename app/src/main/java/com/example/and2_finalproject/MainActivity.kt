@@ -15,7 +15,6 @@ import com.example.and2_finalproject.adapter.ProductAdapter
 import com.example.and2_finalproject.databinding.ActivityMainBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Product
-import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
     private var progressDialog: ProgressDialog? = null
@@ -27,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = binding.bottomNavigationView
         val navController = findNavController(R.id.fragment)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.search, R.id.home, R.id.profile))
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.home,R.id.product,  R.id.profile ,R.id.category))
+//        setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNav.setupWithNavController(navController)
 
@@ -63,8 +62,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
                 val productsAdapter = ProductAdapter(productsArr)
-                binding.rvProducts.layoutManager = GridLayoutManager(this, 2)
-                binding.rvProducts.adapter = productsAdapter
+//                binding.rvProducts.layoutManager = GridLayoutManager(this, 2)
+//                binding.rvProducts.adapter = productsAdapter
                 hideDialog()
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
@@ -72,10 +71,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error while retrieving data", Toast.LENGTH_SHORT).show()
             }
 
-        binding.btnTest.setOnClickListener {
-            val i = Intent(this,ProfileActivity::class.java)
-            startActivity(i)
-        }
+//        binding.btnTest.setOnClickListener {
+//            val i = Intent(this,ProfileActivity::class.java)
+//            startActivity(i)
+//        }
 
     }
     private fun showDialog() {

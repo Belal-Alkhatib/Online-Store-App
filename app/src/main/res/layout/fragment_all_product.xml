@@ -5,17 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchFragment"
-    android:id="@+id/search">
+    android:background="@color/white"
+    android:id="@+id/product">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="search"
+        android:text="product"
         android:textSize="30dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/tv_search"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@color/purple_700"
+        android:drawableEnd="@drawable/ic_baseline_search_24"
+        android:hint="Search"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
