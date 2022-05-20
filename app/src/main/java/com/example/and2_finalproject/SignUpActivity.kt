@@ -12,12 +12,13 @@ import com.google.firebase.auth.FirebaseUser
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
+    lateinit var binding : ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivitySignUpBinding.inflate(layoutInflater)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val firebaseFun = FirebaseFunctions()
+
 
         //startActivity(Intent(this,MainActivity::class.java)) // --> what is that
 
@@ -41,10 +42,9 @@ class SignUpActivity : AppCompatActivity() {
                 val name = binding.etFullName.text.toString()
                 val email = binding.etEmail.text.toString()
                 val password = binding.etPassword.text.toString()
-                val userId = auth.currentUser
 
-                authSingUp(email,password)
-                firebaseFun.addVisitor(userId.toString(),name,email,password,"")
+
+                authSingUp(name,email,password)
             }else{
                 Toast.makeText(this, "Please Fill in The Required Fields", Toast.LENGTH_SHORT).show()
 
@@ -54,15 +54,38 @@ class SignUpActivity : AppCompatActivity() {
 
 
     // authSingUp(binding.etEmail.text.toString(),binding.etPassword.text.toString())
-         private fun authSingUp(email:String ,password:String) {
+         private fun authSingUp(name:String,email:String ,password:String) {
              Log.e( "authSingUp: ",email )
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.e("hzm", "createUserWithEmail:success")
-                        val i = Intent(this,ProfileActivity::class.java)
-                        startActivity(i)
+
+                        val firebaseFun = FirebaseFunctions()
+                        val userId = auth.currentUser.toString()
+                        Log.e("hzm", "authSingUp: $userId")
+
+                        var visitor = hashMapOf(
+                            "id" to userId,
+                            "name" to name,
+                            "email" to email,
+                            "password" to password,
+                            "image" to ""
+                        )
+                        firebaseFun.db.collection(firebaseFun.COLLECTION_VISITORS).document(userId)
+                            .set(visitor)
+                            .addOnSuccessListener { documentReference ->
+                                Log.e("hzm", "Added Successfully $userId")
+                                val i = Intent(this,ProfileActivity::class.java)
+                                startActivity(i)
+                            }
+                            .addOnFailureListener {
+                                Log.e("hzm", it.message.toString())
+                            }
+
+
+
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.e("hzm", "createUserWithEmail:failure", task.exception)

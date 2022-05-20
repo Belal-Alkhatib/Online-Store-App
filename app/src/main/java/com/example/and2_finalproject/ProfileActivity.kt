@@ -21,7 +21,7 @@ import java.io.ByteArrayOutputStream
 
 class ProfileActivity : AppCompatActivity() {
     val firebaseFunctions = FirebaseFunctions()
-    lateinit var binding:ActivityProfileBinding
+    lateinit var binding: ActivityProfileBinding
     var db = FirebaseFirestore.getInstance()
 
     lateinit var auth: FirebaseAuth
@@ -39,9 +39,6 @@ class ProfileActivity : AppCompatActivity() {
         val imageRef = storageRef.child("images")
 
 
-        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){ uri ->
-            binding.personImage.setImageURI(uri)
-        }
 
         binding.btnEdit.setOnClickListener {
             binding.tvname.isEnabled = true
@@ -52,7 +49,8 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.btnSave.setOnClickListener {
 
-            if(binding.tvname.text.isNotEmpty() && binding.etEmail.text.isNotEmpty()){
+            if (binding.tvname.text.isNotEmpty() && binding.etEmail.text.isNotEmpty()) {
+
 
                 val userId = auth.currentUser.toString()
                 val name = binding.tvname.text.toString()
@@ -77,13 +75,20 @@ class ProfileActivity : AppCompatActivity() {
                     Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
                     childRef.downloadUrl.addOnSuccessListener { uri ->
                         URI_IMAGE = uri
-                        firebaseFunctions.updateVisitor(this, userId, name, email, password, uri.toString())
+                        firebaseFunctions.updateVisitor(
+                            this,
+                            userId,
+                            name,
+                            email,
+                            password,
+                            uri.toString()
+                        )
                         binding.btnSave.visibility = View.GONE
 
                     }
 
                 }
-            }else{
+            } else {
                 Toast.makeText(this, "Please fill the data", Toast.LENGTH_SHORT).show()
             }
 
@@ -98,6 +103,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val userId = auth.currentUser.toString()
+        Log.e("hzm", "onStart: $userId" )
         //val visitor = getOneVisitor(userId)
 
         var visitor: Visitor? = null
@@ -115,23 +121,31 @@ class ProfileActivity : AppCompatActivity() {
                         document.getString("image")!!
                     )
                     Log.e("hzm", "Added Successfully")
-                }
-                binding.tvname.setText(visitor!!.name)
-                binding.etEmail.setText(visitor!!.email)
-                binding.etPassword.setText(visitor!!.password)
 
-                Log.e("bil",visitor.toString())
-                if(visitor!!.image == ""){
-                    binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
-                }else{
-                    Picasso.get().load(URI_IMAGE).into(binding.personImage);
+                    binding.tvname.setText(visitor!!.name)
+                    binding.etEmail.setText(visitor!!.email)
+                    binding.etPassword.setText(visitor!!.password)
+                    Log.e("bil", visitor.toString())
+                    if (visitor!!.image == "") {
+                        binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
+                    } else {
+                        Picasso.get().load(URI_IMAGE).into(binding.personImage);
+                    }
                 }
+
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
             }
 
 
 
+
     }
+
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            binding.personImage.setImageURI(uri)
+        }
 
 }
