@@ -1,6 +1,7 @@
 package com.example.and2_finalproject
 
 import android.R
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.and2_finalproject.databinding.ActivityAddProductBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Category
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
@@ -121,6 +123,20 @@ class AddProduct : AppCompatActivity() {
     private fun hideDialog() {
         if (progressDialog!!.isShowing)
             progressDialog!!.dismiss()
+    }
+    @SuppressLint("MissingPermission")
+    private  fun  getLocationUser(){
+        val locationClient = LocationServices.getFusedLocationProviderClient(this)
+        locationClient.lastLocation
+            .addOnSuccessListener {location->
+                if (location != null){
+                    val lat = location.latitude
+                    val lon = location.longitude
+                    val provider = location.provider
+                }
+            }.addOnFailureListener{ exception ->
+                Log.e("TAG", exception.message.toString() )
+            }
     }
 
 }

@@ -117,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:entries="@array/Categories"
+        android:minHeight="48dp"
         android:spinnerMode="dialog"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
