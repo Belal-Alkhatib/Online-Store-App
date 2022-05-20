@@ -1,6 +1,7 @@
 package com.example.and2_finalproject
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -71,9 +72,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error while retrieving data", Toast.LENGTH_SHORT).show()
             }
 
+        binding.btnTest.setOnClickListener {
+            val i = Intent(this,ProfileActivity::class.java)
+            startActivity(i)
+        }
 
     }
-
     private fun showDialog() {
         progressDialog = ProgressDialog(this)
         progressDialog!!.setMessage("Uploading image ...")

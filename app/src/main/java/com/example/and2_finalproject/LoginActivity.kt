@@ -25,12 +25,12 @@ class LoginActivity : AppCompatActivity() {
         binding.btnSignin.setOnClickListener {
             if(binding.etEmail.text.isNotEmpty() && binding.etPassword.text.isNotEmpty()){
 
-                val email = binding.etEmail.text.toString()
+                val email = binding.etEmail.text.toString().trim()
                 val password = binding.etPassword.text.toString()
 
                 if(email == "admin" && password == "admin"){ // اذا تحقق هذا الشرط يكون مسجل الدخول أدمن
-                    val i = Intent(this, Dashboard::class.java)
-                    startActivity(i)
+                    val intent = Intent(this, Dashboard::class.java)
+                    startActivity(intent)
                 }else{
                     authLogin(email,password)
                 }

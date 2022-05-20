@@ -2,26 +2,30 @@ package com.example.and2_finalproject
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.and2_finalproject.databinding.ActivityProfileBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
-import java.net.URI
 
 class ProfileActivity : AppCompatActivity() {
+    val firebaseFunctions = FirebaseFunctions()
+    lateinit var binding:ActivityProfileBinding
     lateinit var auth: FirebaseAuth
+    private var URI_IMAGE: Uri? = null //5.1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityProfileBinding.inflate(layoutInflater)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
@@ -30,7 +34,6 @@ class ProfileActivity : AppCompatActivity() {
         val storageRef = storage.reference
         val imageRef = storageRef.child("images")
 
-        val firebaseFunctions = FirebaseFunctions()
 
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){ uri ->
             binding.personImage.setImageURI(uri)
@@ -69,6 +72,7 @@ class ProfileActivity : AppCompatActivity() {
                     Log.e("hzm", "Image Uploaded Successfully")
                     Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show()
                     childRef.downloadUrl.addOnSuccessListener { uri ->
+                        URI_IMAGE = uri
                         firebaseFunctions.updateVisitor(this, userId, name, email, password, uri.toString())
                         binding.btnSave.visibility = View.GONE
 
@@ -84,6 +88,25 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnCamera.setOnClickListener {
             getContent.launch("images/*")
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val userId = auth.currentUser.toString()
+        val visitor = firebaseFunctions.getOneVisitor(userId)
+
+        binding.tvname.setText(visitor.name)
+        binding.etEmail.setText(visitor.email)
+        binding.etPassword.setText(visitor.password)
+
+        Log.e("bil",visitor.toString())
+        if(visitor.image == null){
+            binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
+        }else{
+            Picasso.get().load(URI_IMAGE).into(binding.personImage);
+        }
+
 
     }
 }

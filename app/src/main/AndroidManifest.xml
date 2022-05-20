@@ -10,17 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.And2_FinalProject">
         <activity
-            android:name=".dashboard"
+            android:name=".Dashboard"
             android:exported="false" />
         <activity
             android:name=".Splash"
             android:exported="true">
-            android:name=".LoginActivity"
+
+
+        </activity>
+
+        <activity
+            android:name=".SignUpActivity"
             android:exported="true" >
 
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".ProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,14 +38,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ShowDetailsShop"
-            android:exported="false"></activity>
+            android:name=".ShowProductDetails"
+            android:exported="false"/>
         <activity
             android:name=".AddCategory"
             android:exported="false" />
