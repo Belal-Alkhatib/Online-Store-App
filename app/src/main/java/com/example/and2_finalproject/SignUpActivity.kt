@@ -20,7 +20,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
 
-        //startActivity(Intent(this,MainActivity::class.java)) // --> what is that
+       // startActivity(Intent(this,ProfileActivity::class.java)) // --> what is that
 
 
         binding.btnAdmin.setOnClickListener {
@@ -79,6 +79,7 @@ class SignUpActivity : AppCompatActivity() {
                                 Log.e("hzm", "Added Successfully $userId")
                                 val i = Intent(this,ProfileActivity::class.java)
                                 startActivity(i)
+                                finish()
                             }
                             .addOnFailureListener {
                                 Log.e("hzm", it.message.toString())

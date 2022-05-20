@@ -95,13 +95,10 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         binding.btnCamera.setOnClickListener {
-            getContent.launch("images/*")
+            getContent.launch("image/*")
         }
 
-    }
 
-    override fun onStart() {
-        super.onStart()
         val userId = auth.currentUser.toString()
         Log.e("hzm", "onStart: $userId" )
         //val visitor = getOneVisitor(userId)
