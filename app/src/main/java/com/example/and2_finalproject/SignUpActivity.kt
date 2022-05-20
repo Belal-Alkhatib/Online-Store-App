@@ -63,7 +63,7 @@ class SignUpActivity : AppCompatActivity() {
                         Log.e("hzm", "createUserWithEmail:success")
 
                         val firebaseFun = FirebaseFunctions()
-                        val userId = auth.currentUser.toString()
+                        val userId = auth.currentUser!!.uid
                         Log.e("hzm", "authSingUp: $userId")
 
                         var visitor = hashMapOf(

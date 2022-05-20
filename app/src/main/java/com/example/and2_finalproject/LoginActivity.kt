@@ -10,6 +10,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
+
+    companion object{
+        var isAdmin = false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -29,8 +34,10 @@ class LoginActivity : AppCompatActivity() {
                 val password = binding.etPassword.text.toString()
 
                 if(email == "admin" && password == "admin"){ // اذا تحقق هذا الشرط يكون مسجل الدخول أدمن
+                    isAdmin = true
                     val intent = Intent(this, Dashboard::class.java)
                     startActivity(intent)
+                    finish()
                 }else{
                     authLogin(email,password)
                 }
@@ -53,6 +60,9 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.e("hzm", "signInWithEmail:success")
                     val user = auth.currentUser
+                    Log.e("hzm", "authLogin: ${user.toString()}", )
+                    Log.e("hzm", "authLogin: ${user!!.email}", )
+                    Log.e("hzm", "authLogin: ${user!!.uid}", )
 
                     val i = Intent(this,ProfileActivity::class.java)
                     startActivity(i)
