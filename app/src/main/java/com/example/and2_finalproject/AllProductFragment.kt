@@ -179,7 +179,7 @@ class SearchFragment : Fragment() {
                     var pro = Product(id, name, description, price, location, bought, rate, img, categoryName )
 
                     productList.add(pro)
-                    Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Category Search finished", Toast.LENGTH_SHORT).show()
 
                     val employeeAdapter = ProductAdapter(productList)
                     binding.rvProducts.adapter = employeeAdapter
