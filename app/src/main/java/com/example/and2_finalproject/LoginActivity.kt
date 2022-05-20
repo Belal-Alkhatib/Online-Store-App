@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.e("hzm", "authLogin: ${user!!.email}", )
                     Log.e("hzm", "authLogin: ${user!!.uid}", )
 
-                    val i = Intent(this,ProfileActivity::class.java)
+                    val i = Intent(this,MainActivity::class.java)
                     startActivity(i)
                     finish()
                 } else {
