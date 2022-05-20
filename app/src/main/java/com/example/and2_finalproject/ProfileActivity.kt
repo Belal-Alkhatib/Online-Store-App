@@ -98,25 +98,11 @@ class ProfileActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val userId = auth.currentUser.toString()
-        val visitor = getOneVisitor(userId)
+        //val visitor = getOneVisitor(userId)
 
-        binding.tvname.setText(visitor.name)
-        binding.etEmail.setText(visitor.email)
-        binding.etPassword.setText(visitor.password)
-
-        Log.e("bil",visitor.toString())
-        if(visitor.image == ""){
-            binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
-        }else{
-            Picasso.get().load(URI_IMAGE).into(binding.personImage);
-        }
-
-
-    }
-    private fun getOneVisitor(id: String): Visitor {
         var visitor: Visitor? = null
         db.collection("Visitors")
-            .whereEqualTo("id", id)
+            .whereEqualTo("id", userId)
             .limit(1)
             .get()
             .addOnSuccessListener { querySnapshot ->
@@ -130,9 +116,22 @@ class ProfileActivity : AppCompatActivity() {
                     )
                     Log.e("hzm", "Added Successfully")
                 }
+                binding.tvname.setText(visitor!!.name)
+                binding.etEmail.setText(visitor!!.email)
+                binding.etPassword.setText(visitor!!.password)
+
+                Log.e("bil",visitor.toString())
+                if(visitor!!.image == ""){
+                    binding.personImage.setImageResource(R.drawable.ic_baseline_dark)
+                }else{
+                    Picasso.get().load(URI_IMAGE).into(binding.personImage);
+                }
             }.addOnFailureListener { error ->
                 Log.e("hzm", error.message.toString())
             }
-        return visitor!!
+
+
+
     }
+
 }

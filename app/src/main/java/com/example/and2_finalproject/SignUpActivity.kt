@@ -61,7 +61,7 @@ class SignUpActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.e("hzm", "createUserWithEmail:success")
-                        val i = Intent(this,MainActivity::class.java)
+                        val i = Intent(this,ProfileActivity::class.java)
                         startActivity(i)
                     } else {
                         // If sign in fails, display a message to the user.
