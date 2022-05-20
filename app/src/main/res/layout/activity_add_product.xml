@@ -4,126 +4,178 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@color/white"
     tools:context=".AddProduct">
 
-
-    <EditText
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/main_color"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        android:textColor="@color/main_color"
-        android:textColorHint="@color/third_color"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_product" />
-
-    <EditText
-        android:id="@+id/tvDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/main_color"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Description..."
-        android:inputType="textMultiLine"
-        android:lines="2"
-        android:textColor="@color/main_color"
-        android:textColorHint="@color/third_color"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
-
-
-    <EditText
-        android:id="@+id/tvPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/main_color"
-        android:hint="Price"
-        android:inputType="number"
-        android:textColor="@color/main_color"
-        android:textColorHint="@color/third_color"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
-
-    <EditText
-        android:id="@+id/tvLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/main_color"
-        android:hint="Location"
-        android:inputType="textPersonName"
-        android:textColor="@color/main_color"
-        android:textColorHint="@color/third_color"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
-
-    <android.widget.Button
-        android:id="@+id/btnSave"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/shape_btn_primary"
-        android:text="Save"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/btn" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="166dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Add Product"
-        android:textColor="@color/main_color"
-        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_product"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-40dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_image" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-    <Spinner
-        android:id="@+id/sp_categories"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:entries="@array/Categories"
-        android:minHeight="48dp"
-        android:spinnerMode="dialog"
-        android:textColor="#000000"
-        android:background="@color/teal_200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="555dp"
+            android:padding="20dp"
+            tools:ignore="MissingConstraints">
+
+            <EditText
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/input_text_bacground"
+                android:drawableEnd="@drawable/ic_product"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:paddingLeft="8dp"
+
+                android:paddingRight="8dp"
+                android:textColor="@color/main_color"
+                android:textColorHint="#ABADAE"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_product" />
+
+
+            <EditText
+                android:id="@+id/tvDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_text_bacground"
+                android:drawableEnd="@drawable/ic_description"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="More Details .."
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/main_color"
+                android:textColorHint="#ABADAE"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <EditText
+                android:id="@+id/tvPrice"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_text_bacground"
+                android:hint="Price"
+                android:inputType="number"
+                android:paddingLeft="8dp"
+                android:drawableEnd="@drawable/ic_price"
+                android:paddingEnd="16dp"
+
+                android:textColor="@color/main_color"
+                android:textColorHint="#ABADAE"
+
+                android:textSize="20sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tvName"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <EditText
+                android:id="@+id/tvLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableEnd="@drawable/ic_location"
+                android:paddingLeft="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/input_text_bacground"
+                android:textColorHint="#ABADAE"
+                android:hint="Location"
+                android:inputType="textPersonName"
+                android:textColor="@color/main_color"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+
+            <android.widget.Button
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_gradient"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sp_categories"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/prodect"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/sp_categories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/Categories"
+                android:minHeight="48dp"
+                android:spinnerMode="dialog"
+                android:textColor="#000000"
+                android:background="@drawable/input_text_bacground"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLocation"
+                tools:ignore="HardcodedText" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
