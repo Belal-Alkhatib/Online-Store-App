@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.and2_finalproject.databinding.ActivityShowProductDetailsBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Product
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
@@ -42,7 +42,7 @@ class ShowProductDetails : AppCompatActivity() {
             binding.tvPrice.setText(productData!!.price.toString())
             binding.tvBought.text = productData!!.bought.toString()
             binding.tvRating.text = productData!!.rate.toString()
-            binding.tvCategory.text = productData!!.categoryName.toString()
+            binding.tvCategory.text = productData!!.categoryName
         }
 
         binding.btnCanel.setOnClickListener {
@@ -55,19 +55,59 @@ class ShowProductDetails : AppCompatActivity() {
         }
 
         binding.btnBuy.setOnClickListener {
+            showDialog()
             val firebaseFunctions = FirebaseFunctions()
-            firebaseFunctions.updateProduct(
-                productData!!.id,
-                productData!!.name,
-                productData!!.description,
-                productData!!.price,
-                productData!!.location,
-                productData!!.bought + 1,
-                productData!!.rate,
-                productData!!.image,
-                productData!!.categoryName
-            )
-            binding.tvBought.text = (productData!!.bought + 1).toString()
+            val oldId = productData!!.id
+            val name = productData!!.name
+            val description = productData!!.description
+            val price = productData!!.price
+            val location = productData!!.location
+            val bought = productData!!.bought + 1
+            val rate = productData!!.rate
+            val image = productData!!.image
+            val categoryName = productData!!.categoryName
+
+            binding.tvBought.text = (productData!!.bought).toString()
+
+            val product = HashMap<String, Any>()
+            product["name"] = name
+            product["description"] = description
+            product["price"] = price
+            product["location"] = location
+            product["bought"] = bought
+            product["rate"] = rate
+            product["image"] = image
+            product["categoryName"] = categoryName
+
+
+            firebaseFunctions.db.collection(firebaseFunctions.COLLECTION_PRODUCTS).document(oldId)
+                .update(product)
+                .addOnSuccessListener {
+                    hideDialog()
+                    Log.e("hzm", "Updated Successfully")
+                    productData!!.bought += 1
+                    binding.tvBought.text = (productData!!.bought).toString()
+
+
+                    val auth = FirebaseAuth.getInstance()
+                    val bought = hashMapOf("buyerId" to auth.currentUser!!.uid, "productId" to productData!!.id)
+                    firebaseFunctions.db.collection(firebaseFunctions.COLLECTION_BOUGHT_PRODUCTS)
+                        .add(bought)
+                        .addOnSuccessListener { documentReference ->
+                            Log.e("hzm", "bought Added Successfully ${documentReference.id}")
+
+                        }
+                        .addOnFailureListener {
+                            Log.e("hzm", it.message.toString())
+                        }
+
+
+                }.addOnFailureListener { exception ->
+                    Log.e("hzm", exception.message.toString())
+                    hideDialog()
+                }
+
+
         }
 
         binding.btnEdit.setOnClickListener {

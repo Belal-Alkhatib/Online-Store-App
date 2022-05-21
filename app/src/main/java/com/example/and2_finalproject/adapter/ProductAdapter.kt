@@ -31,7 +31,7 @@ class ProductAdapter(var data: ArrayList<Product>): RecyclerView.Adapter<Product
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.cardViewBinding.apply {
             tvName.text = data[position].name
-            tvPrice.text = data[position].price.toString()
+            tvPrice.text = data[position].price.toString() + "$"
             Picasso.get().load(data[position].image).into(imgProduct);
         }
 

@@ -19,6 +19,7 @@ class FirebaseFunctions {
     val COLLECTION_ADMINS = "Admins";
     val COLLECTION_VISITORS = "Visitors";
     val COLLECTION_CATEGORIES = "categories";
+    val COLLECTION_BOUGHT_PRODUCTS = "bought";
 
 
 

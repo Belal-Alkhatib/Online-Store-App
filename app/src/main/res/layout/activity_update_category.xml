@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@color/white"
-    tools:context=".AddCategory">
+    tools:context=".UpdateCategory">
 
     <View
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         android:layout_height="92dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Add Category"
+        android:text="Update Category"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -100,6 +100,19 @@
                 android:layout_marginBottom="150dp"
                 android:background="@drawable/btn_gradient"
                 android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/btnCancel"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="90dp"
+                android:background="@drawable/btn_gradient"
+                android:text="Cancel"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -28,6 +28,11 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
+
+        if (!LoginActivity.isAdmin) {
+            binding.btnAdd.visibility = View.INVISIBLE
+        }
+
         return binding.root
     }
 
@@ -75,9 +80,7 @@ class CategoryFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error while retrieving data", Toast.LENGTH_SHORT).show()
             }
 
-        if (!LoginActivity.isAdmin) {
-            binding.btnAdd.visibility = View.INVISIBLE
-        }
+
 
         binding.btnAdd.setOnClickListener {
             startActivity(Intent(requireContext(),AddCategory::class.java))

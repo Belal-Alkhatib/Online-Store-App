@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.and2_finalproject.LoginActivity
+import com.example.and2_finalproject.ShowProductDetails
+import com.example.and2_finalproject.UpdateCategory
 import com.example.and2_finalproject.databinding.CategoryCardViewBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Category
@@ -35,6 +37,13 @@ class CategoryAdapter(var data: ArrayList<Category>) :
 
         if (!LoginActivity.isAdmin) {
             holder.cardViewBinding.btnDelete.visibility = View.INVISIBLE
+
+
+        }else{
+            holder.cardViewBinding.root.setOnClickListener {
+                UpdateCategory.categoryData = data[position]
+                context.startActivity(Intent(context, UpdateCategory::class.java))
+            }
         }
 
         holder.cardViewBinding.btnDelete.setOnClickListener {

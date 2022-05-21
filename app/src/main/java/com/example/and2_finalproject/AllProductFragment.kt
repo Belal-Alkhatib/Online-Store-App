@@ -37,6 +37,10 @@ class SearchFragment : Fragment() {
 
         db = com.google.firebase.ktx.Firebase.firestore
 
+        if (!LoginActivity.isAdmin) {
+            binding.btnAdd.visibility = View.INVISIBLE
+        }
+
  binding.btnSearch.setOnClickListener {
      if(binding.tvSearch.text.isNotEmpty()){
          val search = binding.tvSearch.text.toString()
@@ -62,6 +66,7 @@ class SearchFragment : Fragment() {
         val firebaseFunctions = FirebaseFunctions()
         val productsArr = ArrayList<Product>()
         firebaseFunctions.db.collection(firebaseFunctions.COLLECTION_PRODUCTS)
+            .orderBy("categoryName")
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot) {
@@ -98,9 +103,7 @@ class SearchFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error while retrieving data", Toast.LENGTH_SHORT).show()
             }
 
-        if (!LoginActivity.isAdmin) {
-            binding.btnAdd.visibility = View.INVISIBLE
-        }
+
 
         binding.btnAdd.setOnClickListener {
             startActivity(Intent(requireContext(),AddProduct::class.java))
