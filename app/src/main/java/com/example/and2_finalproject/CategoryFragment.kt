@@ -140,14 +140,16 @@ class CategoryFragment : Fragment() {
 
                     Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
 
-                    val employeeAdapter = CategoryAdapter(categoryList)
-                    binding.rvCategory.adapter = employeeAdapter
-                    binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
+
 
                 }
+                Log.e("bil",categoryList.toString())
+
+
 
             }
             .addOnFailureListener { exception ->
+                Log.e("bil",categoryList.toString())
 
             }
         //**********

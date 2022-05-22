@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.and2_finalproject.adapter.CategoryAdapter
 import com.example.and2_finalproject.adapter.ProductAdapter
 import com.example.and2_finalproject.databinding.FragmentAllProductBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
@@ -148,6 +149,16 @@ class SearchFragment : Fragment() {
 
                     Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
 
+
+
+                }
+                if(productList.isEmpty()){
+                    val employeeAdapter = ProductAdapter(productList)
+                    binding.rvProducts.adapter = employeeAdapter
+                    binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
+                    binding.tvResultNon.visibility = View.VISIBLE
+
+                }else{
                     val employeeAdapter = ProductAdapter(productList)
                     binding.rvProducts.adapter = employeeAdapter
                     binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
@@ -184,6 +195,16 @@ class SearchFragment : Fragment() {
                     productList.add(pro)
                     Toast.makeText(requireContext(), "Category Search finished", Toast.LENGTH_SHORT).show()
 
+
+
+                }
+                if(productList.isEmpty()){
+                    val employeeAdapter = ProductAdapter(productList)
+                    binding.rvProducts.adapter = employeeAdapter
+                    binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
+                    binding.tvResultNon.visibility = View.VISIBLE
+
+                }else{
                     val employeeAdapter = ProductAdapter(productList)
                     binding.rvProducts.adapter = employeeAdapter
                     binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
@@ -218,6 +239,14 @@ class SearchFragment : Fragment() {
                     productList.add(pro)
                     Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
 
+                }
+                if(productList.isEmpty()){
+                    val employeeAdapter = ProductAdapter(productList)
+                    binding.rvProducts.adapter = employeeAdapter
+                    binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
+                    binding.tvResultNon.visibility = View.VISIBLE
+
+                }else{
                     val employeeAdapter = ProductAdapter(productList)
                     binding.rvProducts.adapter = employeeAdapter
                     binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
@@ -252,6 +281,14 @@ class SearchFragment : Fragment() {
                     productList.add(pro)
                     Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
 
+                }
+                if(productList.isEmpty()){
+                    val employeeAdapter = ProductAdapter(productList)
+                    binding.rvProducts.adapter = employeeAdapter
+                    binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
+                    binding.tvResultNon.visibility = View.VISIBLE
+
+                }else{
                     val employeeAdapter = ProductAdapter(productList)
                     binding.rvProducts.adapter = employeeAdapter
                     binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
