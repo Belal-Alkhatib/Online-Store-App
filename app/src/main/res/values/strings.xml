@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">And2_FinalProject</string>
+    <string name="app_name">My Shop</string>
     <array name="Categories">
         <item>Books</item>
         <item>Cloths</item>
