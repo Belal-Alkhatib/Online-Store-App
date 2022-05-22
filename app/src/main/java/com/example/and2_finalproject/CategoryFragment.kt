@@ -123,34 +123,28 @@ class CategoryFragment : Fragment() {
 
     private fun whereCategoryName(categoryName:String){
         //**********
-        val productList = ArrayList<Product>()
+        val categoryList = ArrayList<Category>()
 
         db.collection("categories").whereEqualTo("name",categoryName)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){
                     var id = document.get("id").toString()
+                    var description = document.get("description").toString()
                     var name = document.get("name").toString()
-                    val description = document.get("description").toString()
-                    val price = document.get("price").toString().toDouble()
-                    val location = document.get("location").toString()
-                    val bought = document.get("bought").toString().toInt()
-                    val rate = document.get("rate").toString().toDouble()
-                    val img = document.get("image").toString()
-                    val categoryName = document.get("categoryName").toString()
 
-                    var pro = Product(id, name, description, price, location, bought, rate, img, categoryName )
 
-                    productList.add(pro)
+                    var cat = Category(id, name, description)
+
+                    categoryList.add(cat)
 
                     Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
 
-                    val employeeAdapter = ProductAdapter(productList)
+                    val employeeAdapter = CategoryAdapter(categoryList)
                     binding.rvCategory.adapter = employeeAdapter
                     binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
 
                 }
-                Log.e("bil",productList.toString())
 
             }
             .addOnFailureListener { exception ->
