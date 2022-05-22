@@ -125,7 +125,7 @@ class CategoryFragment : Fragment() {
         //**********
         val productList = ArrayList<Product>()
 
-        db.collection("products").whereEqualTo("categoryName",categoryName)
+        db.collection("categories").whereEqualTo("name",categoryName)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){
