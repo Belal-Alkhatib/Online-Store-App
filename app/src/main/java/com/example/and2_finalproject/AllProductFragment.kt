@@ -199,7 +199,7 @@ class SearchFragment : Fragment() {
         //**********
         val productList = ArrayList<Product>()
 
-        db.collection("products").whereEqualTo("price",price)
+        db.collection("products").whereGreaterThanOrEqualTo("price",price)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){
@@ -233,7 +233,7 @@ class SearchFragment : Fragment() {
         //**********
         val productList = ArrayList<Product>()
 
-        db.collection("products").whereEqualTo("rate",rate)
+        db.collection("products").whereGreaterThanOrEqualTo("rate",rate)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for( document in querySnapshot){

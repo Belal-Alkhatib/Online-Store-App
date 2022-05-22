@@ -17,11 +17,32 @@ import com.example.and2_finalproject.databinding.FragmentCategoryBinding
 import com.example.and2_finalproject.firebase.FirebaseFunctions
 import com.example.and2_finalproject.model.Category
 import com.example.and2_finalproject.model.Product
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 
 class CategoryFragment : Fragment() {
-
+    lateinit var db: FirebaseFirestore
     lateinit var binding: FragmentCategoryBinding
    // private var progressDialog: ProgressDialog? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        db = com.google.firebase.ktx.Firebase.firestore
+
+        if (!LoginActivity.isAdmin) {
+            binding.btnAdd.visibility = View.INVISIBLE
+        }
+
+        binding.btnSearch.setOnClickListener {
+            if(binding.tvSearch.text.isNotEmpty()){
+                val search = binding.tvSearch.text.toString()
+                whereCategoryName(search)
+            }else{
+                Toast.makeText(requireContext(), "Please Fill Fields And Select a Operation", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,4 +120,42 @@ class CategoryFragment : Fragment() {
         if (progressDialog!!.isShowing)
             progressDialog!!.dismiss()
     }*/
+
+    private fun whereCategoryName(categoryName:String){
+        //**********
+        val productList = ArrayList<Product>()
+
+        db.collection("products").whereEqualTo("categoryName",categoryName)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for( document in querySnapshot){
+                    var id = document.get("id").toString()
+                    var name = document.get("name").toString()
+                    val description = document.get("description").toString()
+                    val price = document.get("price").toString().toDouble()
+                    val location = document.get("location").toString()
+                    val bought = document.get("bought").toString().toInt()
+                    val rate = document.get("rate").toString().toDouble()
+                    val img = document.get("image").toString()
+                    val categoryName = document.get("categoryName").toString()
+
+                    var pro = Product(id, name, description, price, location, bought, rate, img, categoryName )
+
+                    productList.add(pro)
+
+                    Toast.makeText(requireContext(), "Category Search Downloaded", Toast.LENGTH_SHORT).show()
+
+                    val employeeAdapter = ProductAdapter(productList)
+                    binding.rvCategory.adapter = employeeAdapter
+                    binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
+
+                }
+                Log.e("bil",productList.toString())
+
+            }
+            .addOnFailureListener { exception ->
+
+            }
+        //**********
+    }
 }

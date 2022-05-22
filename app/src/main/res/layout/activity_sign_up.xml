@@ -126,7 +126,7 @@
                     android:drawableRight="@drawable/ic_person"
                     android:paddingRight="10dp"
                     android:background="@drawable/input_text_bacground"
-
+                    android:paddingLeft="10dp"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -148,6 +148,7 @@
                     android:drawableRight="@drawable/ic_email"
                     android:paddingRight="10dp"
                     android:background="@drawable/input_text_bacground"
+                    android:paddingLeft="10dp"
 
                     />
                 <TextView
@@ -170,6 +171,7 @@
                     android:drawableRight="@drawable/ic_password"
                     android:paddingRight="10dp"
                     android:background="@drawable/input_text_bacground"
+                    android:paddingLeft="10dp"
 
                     />
 

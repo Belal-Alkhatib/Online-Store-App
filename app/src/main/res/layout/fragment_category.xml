@@ -37,22 +37,35 @@
 <!--        android:textColorHint="@color/white"-->
 <!--        android:textSize="20sp" />-->
 
+
     <EditText
         android:id="@+id/tv_search"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:background="@drawable/search_box_style"
-        android:drawableEnd="@drawable/ic_baseline_search_24"
         android:hint="Search"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/gray"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/btn_search"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_search"
+        app:layout_constraintEnd_toEndOf="@+id/tv_search"
+        app:layout_constraintTop_toTopOf="@+id/tv_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategory"
