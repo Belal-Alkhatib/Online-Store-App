@@ -118,12 +118,10 @@ class SearchFragment : Fragment() {
         progressDialog!!.setCancelable(false)
         progressDialog!!.show()
     }
-
     private fun hideDialog() {
         if (progressDialog!!.isShowing)
             progressDialog!!.dismiss()
     }
-
     private fun whereCategoryName(categoryName:String){
         Log.e("bil","Category Name")
         //**********

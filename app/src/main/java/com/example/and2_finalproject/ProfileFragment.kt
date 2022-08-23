@@ -158,8 +158,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private val getContent =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             binding.personImage.setImageURI(uri)
         }
 
