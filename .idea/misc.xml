@@ -3,21 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/drawable/default_image_background.xml" value="0.172" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/layout/activity_show_product_details.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/layout/activity_splash.xml" value="0.2" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/layout/fragment_all_product.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2/And2_FinalProject/app/src/main/res/layout/product_card_view.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable-v24/btn_background.xml" value="0.1035" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable-v24/btn_search.xml" value="0.1515" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable-v24/ic_battery.xml" value="0.1035" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2115" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable-v24/ic_store.xml" value="0.1035" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable-v24/search_box.xml" value="0.1405" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable/btn_add.xml" value="0.146" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable/btn_gradient.xml" value="0.1195" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable/btn_white_background.xml" value="0.1315" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/drawable/ic_admin24.xml" value="0.1315" />
@@ -31,19 +22,15 @@
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_add_category.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_add_product.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_dashboard.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_show_details_shop.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_show_product_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/activity_update_category.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/category_card_view.xml" value="0.25" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/fragment_all_product.xml" value="0.22" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/fragment_category.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/01/AndroidStudioProjects/And2_FinalProject/app/src/main/res/layout/product_card_view.xml" value="0.25" />
         <entry key="..\:/Users/sa/AndroidStudioProjects/FinalProject_And2/app/src/main/res/drawable-v24/btn_background.xml" value="0.167" />
         <entry key="..\:/Users/sa/AndroidStudioProjects/FinalProject_And2/app/src/main/res/drawable-v24/card_style_num_of_item.xml" value="0.167" />
